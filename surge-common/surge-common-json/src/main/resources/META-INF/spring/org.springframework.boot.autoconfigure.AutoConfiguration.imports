@@ -1,0 +1,2 @@
+com.surge.common.json.config.JacksonConfig
+com.surge.common.json.config.ValidatorConfig

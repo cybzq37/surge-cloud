@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surge.device.repository.DeviceInstanceMapper">
+
+	<resultMap id="DeviceInstanceResult" type="com.surge.device.domain.entity.DeviceInstance">
+		<!--@mbg.generated-->
+		<id column="tid" property="tid"/>
+		<result column="mfid" property="mfid" />
+		<result column="epid" property="epid" />
+		<result column="name" property="name" />
+		<result column="type_id" property="typeId" />
+		<result column="org_id" property="orgId" />
+		<result column="field_info" property="fieldInfo" typeHandler="com.surge.common.core.mybatis.handler.JsonbTypeHandler" />
+		<result column="last_pos_time" property="lastPosTime" />
+		<result column="last_pos_geom" property="lastPosGeom" typeHandler="com.surge.common.core.mybatis.handler.GeometryTypeHandler" />
+		<result column="last_pos_geo_json" property="lastPosGeoJson" typeHandler="com.surge.common.core.mybatis.handler.JsonTypeHandler" />
+		<result column="status" property="status" />
+		<result column="update_time" property="updateTime" />
+	</resultMap>
+
+	<select id="selectOne" resultMap="DeviceInstanceResult">
+		SELECT
+			tid, mfid, epid, name, type_id, org_id, field_info, last_pos_time, last_pos_geom,
+			ST_AsGeoJSON(last_pos_geom) as last_pos_geo_json,
+		status
+		FROM nc_device.device_instance
+		<where>
+			${ew.sqlSegment}
+		</where>
+		order by tid asc
+	</select>
+
+	<select id="selectById" resultMap="DeviceInstanceResult">
+		SELECT
+		tid, mfid, epid, name, type_id, org_id, field_info, last_pos_time, last_pos_geom,
+		ST_AsGeoJSON(last_pos_geom) as last_pos_geo_json,
+		status
+		FROM nc_device.device_instance
+		WHERE
+		tid = #{tid}
+		order by tid asc
+	</select>
+
+	<select id="queryList" resultMap="DeviceInstanceResult">
+		SELECT
+		tid, mfid, epid, name, type_id, org_id, field_info, last_pos_time, last_pos_geom,
+		ST_AsGeoJSON(last_pos_geom) as last_pos_geo_json,
+		status
+		FROM nc_device.device_instance
+		<where>
+			${ew.sqlSegment}
+			<!-- 动态拼接 JSONB 查询条件 -->
+			<if test="fieldInfo != null">
+				<foreach collection="fieldInfo" item="entry" index="key" open="AND (" separator="AND" close=")">
+					field_info @> CAST('{"${key}": ${entry}}' AS JSONB)
+				</foreach>
+			</if>
+		</where>
+		order by tid asc
+	</select>
+
+	<update id="updateById" parameterType="com.surge.device.domain.entity.DeviceInstance" >
+		UPDATE nc_device.device_instance
+		<set>
+			<if test="et.mfid != null">
+				mfid = #{et.mfid},
+			</if>
+			<if test="et.epid != null">
+				epid = #{et.epid},
+			</if>
+			<if test="et.name != null">
+				name = #{et.name},
+			</if>
+			<if test="et.typeId != null">
+				type_id = #{et.typeId},
+			</if>
+			<if test="et.orgId != null">
+				org_id = #{et.orgId},
+			</if>
+			<if test="et.lastPosTime != null">
+				last_pos_time = #{et.lastPosTime},
+			</if>
+			<if test="et.lastPosGeoJson != null">
+				last_pos_geom = ST_GeomFromGeoJSON(#{et.lastPosGeoJson, typeHandler=com.surge.common.core.mybatis.handler.JsonTypeHandler}),
+			</if>
+			<if test="et.fieldInfo != null">
+				field_info = #{et.fieldInfo, typeHandler=com.surge.common.core.mybatis.handler.JsonbTypeHandler},
+			</if>
+			<if test="et.model != null">
+				model = #{et.model},
+			</if>
+			<if test="et.status != null">
+				status = #{et.status},
+			</if>
+			<if test="et.visible != null">
+				visible = #{et.visible},
+			</if>
+			<if test="et.ownerId != null">
+				owner_id = #{et.ownerId},
+			</if>
+			<if test="et.ownerName != null">
+				owner_name = #{et.ownerName},
+			</if>
+			<if test="et.ownerIdType != null">
+				owner_id_type = #{et.ownerIdType},
+			</if>
+		</set>
+		WHERE tid = #{et.tid}
+	</update>
+
+	<select id="queryDeviceStatusByType" resultType="java.util.Map">
+		SELECT
+			p.id as type_id,
+			p.name as type_name,
+			COUNT(t.*) AS total,
+			SUM(CASE WHEN t.status = 0 THEN 1 ELSE 0 END) AS online,
+			SUM(CASE WHEN t.status != 0 THEN 1 ELSE 0 END) AS offline
+		FROM nc_device.device_instance t
+		LEFT JOIN nc_device.device_type p ON t.type_id = p.id
+		<where>
+			<if test="orgIds != null and orgIds.size() > 0">
+				t.org_id IN
+				<foreach collection="orgIds" item="orgId" open="(" separator="," close=")">
+					#{orgId}
+				</foreach>
+			</if>
+		</where>
+		GROUP BY p.id, p.name
+	</select>
+
+	<update id="updateDevicePostion">
+		UPDATE nc_device.device_instance
+		SET
+			last_pos_time = #{ts},
+			last_pos_geom = ST_GeomFromText(CONCAT('POINT(', #{lon}, ' ', #{lat}, ')'), 4326)
+		WHERE tid = #{tid}
+	</update>
+
+
+	<select id="countByCodeAndCategory" resultType="java.util.Map">
+		SELECT
+			dt.code,
+			dt.name,
+			COUNT(*) AS count
+		FROM
+			nc_device.device_type dt
+				INNER JOIN nc_device.device_instance dd ON dd.type_id = dt.id
+		<where>
+			<if test="orgIds != null and orgIds.size() > 0">
+				dd.org_id IN
+				<foreach collection="orgIds" item="orgId" open="(" separator="," close=")">
+					#{orgId}
+				</foreach>
+			</if>
+			<if test="catelog != null">
+				and dt.catelog = #{catelog}
+			</if>
+		</where>
+		GROUP BY
+			dt.code,
+			dt.name
+	</select>
+
+</mapper>

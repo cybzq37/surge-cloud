@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surge.map.repository.LayerInfoMapper">
+
+	<resultMap id="LayerInfoResult" type="com.surge.map.domain.entity.LayerInfo">
+		<!--@mbg.generated-->
+		<id column="id" property="id" />
+		<result column="pid" property="pid" />
+		<result column="name" property="name" />
+		<result column="data_type" property="dataType" />
+		<result column="data_style" property="dataStyle" typeHandler="com.surge.common.core.mybatis.handler.JsonbTypeHandler" />
+		<result column="data_schema" property="dataSchema" typeHandler="com.surge.common.core.mybatis.handler.JsonbTypeHandler" />
+		<result column="data_extent" property="dataExtent" />
+		<result column="data_central" property="dataCentral" />
+		<result column="sort" property="sort" />
+		<result column="release_flag" property="releaseFlag" />
+	</resultMap>
+
+
+</mapper>

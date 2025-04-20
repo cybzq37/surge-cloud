@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.surge</groupId>
+        <artifactId>surge-cloud-parent</artifactId>
+        <version>${revision}</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>surge-auth-service</artifactId>
+
+    <description>
+        surge-auth-service 认证授权中心
+    </description>
+
+    <dependencies>
+        <!--  Common Log -->
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-log</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-dubbo</artifactId>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.surge</groupId>-->
+<!--            <artifactId>surge-mod-seata</artifactId>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-auth-api</artifactId>
+        </dependency>
+
+        <!-- 验证码 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-captcha</artifactId>
+        </dependency>
+
+        <!-- 自定义负载均衡(多团队开发使用) -->
+<!--        <dependency>-->
+<!--            <groupId>com.surge</groupId>-->
+<!--            <artifactId>surge-mod-loadbalancer</artifactId>-->
+<!--        </dependency>-->
+
+        <!-- ELK 日志收集 -->
+<!--        <dependency>-->
+<!--            <groupId>com.surge</groupId>-->
+<!--            <artifactId>surge-mod-logstash</artifactId>-->
+<!--        </dependency>-->
+
+        <!-- skywalking 日志收集 -->
+<!--        <dependency>-->
+<!--            <groupId>com.surge</groupId>-->
+<!--            <artifactId>surge-mod-skylog</artifactId>-->
+<!--        </dependency>-->
+
+        <!-- prometheus 监控 -->
+<!--        <dependency>-->
+<!--            <groupId>com.surge</groupId>-->
+<!--            <artifactId>surge-mod-prometheus</artifactId>-->
+<!--        </dependency>-->
+
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

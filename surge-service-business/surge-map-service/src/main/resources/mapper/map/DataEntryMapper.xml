@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surge.map.repository.DataEntryMapper">
+
+	<resultMap id="DataEntryResult" type="com.surge.map.domain.entity.DataEntry">
+		<!--@mbg.generated-->
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="data_type" property="dataType"/>
+		<result column="file_type" property="fileType"/>
+		<result column="source_type" property="sourceType"/>
+		<result column="source_id" property="sourceId"/>
+		<result column="data_schema" property="dataSchema" typeHandler="com.surge.common.core.mybatis.handler.JsonbTypeHandler" />
+		<result column="data_access" property="dataAccess" typeHandler="com.surge.common.core.mybatis.handler.JsonbTypeHandler" />
+		<result column="data_extent" property="dataExtent" />
+		<result column="data_central" property="dataCentral" />
+		<result column="epsg" property="epsg"/>
+		<result column="coordinate_system" property="coordinateSystem"/>
+		<result column="status" property="status"/>
+		<result column="error_log" property="errorLog"/>
+		<result column="delete_flag" property="delFlag"/>
+		<result column="create_by" property="createBy"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_by" property="updateBy"/>
+		<result column="update_time" property="updateTime"/>
+		<result column="remark" property="remark" />
+	</resultMap>
+
+</mapper>

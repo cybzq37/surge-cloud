@@ -1,0 +1,1 @@
+dubboRequestFilter=com.surge.common.dubbo.filter.DubboRequestFilter

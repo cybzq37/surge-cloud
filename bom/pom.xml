@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.surge</groupId>
+    <artifactId>surge-cloud-parent-bom</artifactId>
+    <version>${revision}</version>
+
+    <packaging>pom</packaging>
+
+    <properties>
+        <revision>0.0.1</revision>
+
+        <!-- 插件版本 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven-compiler-plugin.verison>3.11.0</maven-compiler-plugin.verison>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <flatten-maven-plugin.version>1.3.0</flatten-maven-plugin.version>
+        <java.version>21</java.version>
+
+
+        <!-- springboot版本 -->
+        <spring-boot.version>3.3.10</spring-boot.version>
+        <!-- https://github.com/alibaba/spring-cloud-alibaba/wiki/版本说明 -->
+        <spring-cloud.version>2023.0.5</spring-cloud.version>
+        <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
+        <nacos-client.version>2.4.3</nacos-client.version>
+        <dubbo.version>3.3.2</dubbo.version>
+
+
+        <!-- 数据库连接配置 -->
+        <mybatis.version>3.5.19</mybatis.version>
+        <mybatis-plus.version>3.5.10.1</mybatis-plus.version>
+        <dynamic-ds.version>4.3.1</dynamic-ds.version>
+        <spring-boot.mybatis>2.2.2</spring-boot.mybatis>
+
+        <!-- 数据库驱动配置 -->
+        <postgis.jdbc>2024.1.0</postgis.jdbc>
+        <ojdbc8.version>12.2.0.1</ojdbc8.version>
+        <p6spy.version>3.9.1</p6spy.version>
+
+
+        <!-- redis -->
+        <!-- 升级此版本导致无法启动 可能需要加 spring-boot-starter-actuator -->
+        <!--        <redisson.version>3.38.1</redisson.version>-->
+        <!--        <lock4j.version>2.2.7</lock4j.version>-->
+        <redisson.version>3.20.1</redisson.version>
+        <lock4j.version>2.2.3</lock4j.version>
+
+        <!-- 鉴权 -->
+        <satoken.version>1.37.0</satoken.version>
+
+        <!-- es -->
+        <easy-es.version>1.1.1</easy-es.version>
+        <elasticsearch.version>7.14.0</elasticsearch.version>
+
+
+        <!-- 加密库 -->
+        <bouncycastle.version>1.72</bouncycastle.version>
+
+        <!-- 实体注解 -->
+        <lombok.version>1.18.30</lombok.version>
+
+        <!-- 工具类 -->
+        <hutool.version>5.8.22</hutool.version>
+        <commons-compress.version>1.27.1</commons-compress.version>
+        <commons-lang3.version>3.17.0</commons-lang3.version>
+        <commons-io.version>2.18.0</commons-io.version>
+        <commons-lang3.version>3.17.0</commons-lang3.version>
+        
+        <!-- okhttp版本 -->
+        <okhttp.version>4.10.0</okhttp.version>
+
+        <!-- excel -->
+        <poi.version>5.2.3</poi.version>
+        <easyexcel.version>3.3.2</easyexcel.version>
+        <fastexcel.version>1.1.0</fastexcel.version>
+
+        <!-- 离线IP地址定位库 -->
+        <ip2region.version>2.7.0</ip2region.version>
+
+        <!-- api文档 -->
+        <swagger.core.version>2.2.8</swagger.core.version>
+        <springdoc.version>1.6.15</springdoc.version>
+        <knife4j.version>4.5.0</knife4j.version>
+
+
+        <!-- OSS 配置 -->
+        <aws-java-sdk-s3.version>1.12.540</aws-java-sdk-s3.version>
+
+        <!-- SMS 配置 -->
+        <sms4j.version>2.2.0</sms4j.version>
+
+        <!-- netty连接 -->
+        <netty.version>4.1.116.Final</netty.version>
+
+        <!-- kafka版本 -->
+        <kafka.version>2.9.13</kafka.version>
+
+        <!-- mqtt版本 -->
+        <mqtt.version>1.2.5</mqtt.version>
+
+        <!-- gis相关配置 -->
+        <geotools.version>28.5</geotools.version>
+        <jts.version>1.16.1</jts.version>
+        <gdal.version>3.9.0</gdal.version>
+        <vividsolutions.version>1.14.0</vividsolutions.version>
+    </properties>
+
+</project>

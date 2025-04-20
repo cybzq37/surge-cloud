@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.surge</groupId>
+        <artifactId>surge-cloud-parent-bom</artifactId>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.surge</groupId>
+    <artifactId>surge-mod-bom</artifactId>
+    <packaging>pom</packaging>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- 核心模块 -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- JSON模块 -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-json</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- RPC服务 -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-dubbo</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- ES搜索引擎服务 -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-elasticsearch</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- excel -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-excel</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- 定时任务 -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-job</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- 自定义负载均衡 -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-loadbalancer</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- 日志记录 -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-log</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- 邮件模块 -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-mail</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- 数据库服务 -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-mybatis</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- oss服务 -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-oss</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- 缓存服务 -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-redis</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- 权限认证服务 -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-satoken</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- 分布式事务 -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-seata</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- skywalking日志收集模块 -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-skylog</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- web服务 -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-web</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- gis模块 -->
+            <dependency>
+                <groupId>com.surge</groupId>
+                <artifactId>surge-mod-gis</artifactId>
+                <version>${revision}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

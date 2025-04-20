@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surge.map.repository.DataEntrySetMapper">
+
+	<resultMap id="DataEntrySetResult" type="com.surge.map.domain.entity.DataEntrySet">
+		<!--@mbg.generated-->
+		<id column="id" property="id"/>
+		<result column="data_entry_id" property="dataEntryId" />
+		<result column="geo_json" property="geoJson" typeHandler="com.surge.common.core.mybatis.handler.JsonTypeHandler" />
+		<result column="geom" property="geom" typeHandler="com.surge.common.core.mybatis.handler.GeometryTypeHandler" />
+		<result column="field_info" property="fieldInfo" typeHandler="com.surge.common.core.mybatis.handler.JsonbTypeHandler" />
+	</resultMap>
+
+	<select id="selectOne" resultMap="DataEntrySetResult">
+		SELECT
+			*, ST_AsGeoJSON(geom) as geo_json
+		FROM
+			nc_map.data_entry_set
+		<where>
+			<if test="entryId != null">
+				data_entry_id = #{entryId}
+			</if>
+			<if test="fieldInfo != null">
+				<foreach collection="fieldInfo" item="entry" index="key" open="AND (" separator="AND" close=")">
+					field_info @> CAST('{"${key}": "${entry}"}' AS JSONB)
+				</foreach>
+			</if>
+		</where>
+		order by id asc limit 1
+	</select>
+
+	<select id="selectList" resultMap="DataEntrySetResult">
+		SELECT
+		id,
+		data_entry_id,
+		geom,
+		ST_AsGeoJSON(geom) as geo_json,
+		field_info
+		FROM
+		nc_map.data_entry_set
+		WHERE
+		<!-- 动态拼接 JSONB 查询条件 -->
+		<if test="fieldInfo != null">
+			<foreach collection="fieldInfo" item="entry" index="key" open="AND (" separator="AND" close=")">
+				field_info @> CAST('{"${key}": "${entry}"}' AS JSONB)
+			</foreach>
+		</if>
+		${ew.sqlSegment}
+		order by id asc
+	</select>
+
+	<update id="updateById" parameterType="com.surge.map.domain.entity.DataEntrySet" >
+		UPDATE nc_map.data_entry_set
+		SET
+		<if test="geoJson != null and geoJson != 'null'">
+			geom = ST_GeomFromGeoJSON(#{geoJson, typeHandler=com.surge.common.core.mybatis.handler.JsonTypeHandler}),
+		</if>
+		<if test="fieldInfo != null">
+			field_info = #{fieldInfo, typeHandler=com.surge.common.core.mybatis.handler.JsonbTypeHandler}
+		</if>
+		WHERE id = #{id}
+	</update>
+
+</mapper>

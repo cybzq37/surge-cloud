@@ -1,0 +1,4 @@
+com.surge.common.mybatis.config.MybatisPlusConfiguration
+com.surge.common.mybatis.handler.MybatisExceptionHandler
+com.surge.common.mybatis.service.SysDataScopeService
+com.surge.common.mybatis.encrypt.config.EncryptorAutoConfiguration

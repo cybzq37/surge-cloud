@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surge.device.repository.ElectricFenceEventMapper">
+
+	<resultMap type="ElectricFenceEvent" id="ElectricFenceEventResult">
+		<id     property="id"   column="id"   />
+		<result property="fenceId"   column="fence_id"   />
+		<result property="deviceId"   column="device_id" />
+		<result property="eventType"   column="event_type"  />
+		<result property="createTime"  column="create_time" />
+		<result property="endTime"  column="end_time"  		/>
+		<result property="status"     column="status"      	/>
+		<result property="delFlag"     column="del_flag"    />
+	</resultMap>
+
+
+	<select id="selectListVO" resultType="com.surge.device.domain.bean.ElectricFenceEventVO">
+		SELECT
+			ee.device_id,
+			ee.fence_id,
+			ee.event_type,
+			ee.trace_time,
+			ee.start_time,
+			ee.end_time,
+			ee.last_trace_time,
+			dd.name as device_name,
+			dd.type_id as device_type_id,
+			dd.org_id as org_id,
+			ef.name as fence_name,
+			ef.fence_type,
+			ef.rule_type
+		FROM nc_device.electric_fence_event ee
+		LEFT JOIN nc_device.device_instance dd ON ee.device_id = dd.tid
+		LEFT JOIN nc_device.electric_fence ef ON ee.fence_id = ef.id
+		<where>
+			${ew.sqlSegment}
+		</where>
+	</select>
+
+	<select id="selectPageVO" resultType="com.surge.device.domain.bean.ElectricFenceEventVO">
+		SELECT
+		ee.device_id,
+		ee.fence_id,
+		ee.event_type,
+		ee.trace_time,
+		ee.start_time,
+		ee.end_time,
+		ee.last_trace_time,
+		dd.name as device_name,
+		dd.type_id as device_type_id,
+		dd.org_id as org_id,
+		ef.name as fence_name,
+		ef.fence_type,
+		ef.rule_type
+		FROM nc_device.electric_fence_event ee
+		LEFT JOIN nc_device.device_instance dd ON ee.device_id = dd.tid
+		LEFT JOIN nc_device.electric_fence ef ON ee.fence_id = ef.id
+		<where>
+			${ew.sqlSegment}
+		</where>
+	</select>
+
+</mapper>

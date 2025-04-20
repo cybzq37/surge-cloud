@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.surge</groupId>
+        <artifactId>surge-cloud-parent</artifactId>
+        <version>${revision}</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.surge</groupId>
+    <artifactId>surge-device-netty</artifactId>
+
+    <description>
+        surge-netty设备通讯模块
+    </description>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-web</artifactId>
+        </dependency>
+
+        <!--  Common Log -->
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-log</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-mybatis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-dubbo</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-seata</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-oss</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-mail</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-gis</artifactId>
+        </dependency>
+
+        <!--  Api System -->
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-device-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-minedata-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-station-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.paho</groupId>
+            <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

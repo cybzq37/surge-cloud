@@ -1,0 +1,48 @@
+[
+    {
+        "type": "daily",
+        "timeRanges": [
+            {
+                "start": "09:00",
+                "end": "18:00"
+            }
+        ]
+    },
+    {
+        "type": "week",
+        "daysOfWeek": [
+            1,
+            2,
+            3,
+            4,
+            5
+        ],
+        "timeRanges": [
+            {
+                "start": "08:00",
+                "end": "12:00"
+            },
+            {
+                "start": "14:00",
+                "end": "17:30"
+            }
+        ]
+    },
+    {
+        "type": "month",
+        "months": [
+            1,
+            12
+        ],
+        "daysOfMonth": [
+            1,
+            15
+        ],
+        "timeRanges": [
+            {
+                "start": "10:00",
+                "end": "16:00"
+            }
+        ]
+    }
+]

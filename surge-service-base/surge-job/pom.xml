@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.surge</groupId>
+        <artifactId>surge-cloud-parent</artifactId>
+        <version>${revision}</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.surge</groupId>
+    <artifactId>surge-job</artifactId>
+
+    <description>
+        surge-job 任务调度模块
+    </description>
+
+    <dependencies>
+
+        <!-- SpringCloud Alibaba Nacos -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!-- SpringCloud Alibaba Nacos Config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <!--  Common Log -->
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-log</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-dubbo</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-mybatis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-seata</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-mod-job</artifactId>
+        </dependency>
+
+        <!--  Api System -->
+        <dependency>
+            <groupId>com.surge</groupId>
+            <artifactId>surge-system-api</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

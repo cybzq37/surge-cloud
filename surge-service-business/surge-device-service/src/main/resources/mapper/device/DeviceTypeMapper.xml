@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surge.device.repository.DeviceTypeMapper">
+
+	<resultMap type="DeviceType" id="DeviceTypeResult">
+		<id     property="id"   column="id"  />
+		<result  property="catelog" column="catelog"  />
+		<result  property="code"   column="code"  />
+		<result  property="name"   column="name"  />
+		<result  property="model"  column="model" />
+		<result  property="sort"  column="sort" />
+		<result column="data_style" property="dataStyle" typeHandler="com.surge.common.core.mybatis.handler.JsonbTypeHandler" />
+		<result column="field_schema" property="fieldSchema" typeHandler="com.surge.common.core.mybatis.handler.JsonbTypeHandler" />
+	</resultMap>
+
+	<select id="selectList" resultMap="DeviceTypeResult">
+		SELECT * FROM nc_device.device_type
+		<where>
+			${ew.sqlSegment}
+		</where>
+	</select>
+
+	<select id="selectByCode" resultMap="DeviceTypeResult">
+		SELECT * FROM nc_device.device_type
+		<where>
+			code=#{code}
+		</where>
+	</select>
+
+	<update id="updateById" parameterType="com.surge.device.domain.entity.DeviceType" >
+		UPDATE nc_device.device_type
+		<set>
+			<if test="et.catelog != null">
+				catelog = #{et.catelog},
+			</if>
+			<if test="et.code != null">
+				code = #{et.code},
+			</if>
+			<if test="et.name != null">
+				name = #{et.name},
+			</if>
+			<if test="et.model != null">
+				model = #{et.model},
+			</if>
+			<if test="et.sort != null">
+				sort = #{et.sort},
+			</if>
+			<if test="et.fieldSchema != null">
+				field_schema = #{et.fieldSchema, typeHandler=com.surge.common.core.mybatis.handler.JsonbTypeHandler},
+			</if>
+			<if test="et.dataStyle != null">
+				data_style = #{et.dataStyle, typeHandler=com.surge.common.core.mybatis.handler.JsonbTypeHandler},
+			</if>
+		</set>
+		WHERE id = #{et.id}
+	</update>
+
+</mapper>

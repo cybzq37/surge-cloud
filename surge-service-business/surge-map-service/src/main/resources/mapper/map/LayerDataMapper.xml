@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surge.map.repository.LayerDataMapper">
+
+	<resultMap id="LayerDataResult" type="com.surge.map.domain.entity.LayerData">
+		<!--@mbg.generated-->
+		<id column="id" property="id"/>
+		<result column="layer_id" property="layerId"/>
+		<result column="geo_json" property="geoJson" typeHandler="com.surge.common.core.mybatis.handler.JsonTypeHandler" />
+		<result column="geom" property="geom" typeHandler="com.surge.common.core.mybatis.handler.GeometryTypeHandler" />
+		<result column="field_info" property="fieldInfo" typeHandler="com.surge.common.core.mybatis.handler.JsonbTypeHandler" />
+	</resultMap>
+
+	<select id="selectList" resultMap="LayerDataResult">
+		SELECT id, layer_id, geom, ST_AsGeoJSON(geom) as geo_json, field_info
+		FROM nc_map.layer_data
+		<where>
+			${ew.sqlSegment}
+			<!-- 动态拼接 JSONB 查询条件 -->
+			<if test="fieldInfo != null">
+				<foreach collection="fieldInfo" item="entry" index="key" open="AND (" separator="AND" close=")">
+					field_info @> CAST('{"${key}": ${entry}}' AS JSONB)
+				</foreach>
+			</if>
+		</where>
+	</select>
+
+</mapper>

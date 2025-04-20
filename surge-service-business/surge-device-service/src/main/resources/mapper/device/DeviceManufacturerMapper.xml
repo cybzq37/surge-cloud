@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surge.device.repository.DeviceManufacturerMapper">
+
+	<select id="selectPageVO" resultType="com.surge.device.domain.entity.DeviceManufacturer">
+		SELECT * FROM nc_device.device_manufacturer
+		<where>
+			<if test="name != null and name != ''">
+				and name=#{name}
+			</if>
+			<if test="orgId != null and orgId != ''">
+				and org_id=#{orgId}
+			</if>
+			<if test="code != null and code != ''">
+				and code=#{code}
+			</if>
+			${ew.sqlSegment}
+		</where>
+	</select>
+
+	<select id="selectByCode" resultType="com.surge.device.domain.entity.DeviceManufacturer">
+		SELECT * FROM nc_device.device_manufacturer
+		<where>
+			code=#{code}
+		</where>
+	</select>
+
+</mapper>

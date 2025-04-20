@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surge.device.repository.DeviceTraceMapper">
+
+	<resultMap type="DeviceTrace" id="DeviceTraceResult">
+		<id     property="timestamp"   column="timestamp"   />
+		<result 	property="tid"     column="tid"   />
+		<result     property="mfid"    column="mfid"   />
+		<result     property="epid"    column="epid"   />
+		<result     property="source"  column="source"   />
+		<result     property="elevation"   column="elevation"   />
+		<result     property="lon"   column="lon"   />
+		<result     property="lat"   column="lat"   />
+		<result     property="speed" column="speed"   />
+		<result     property="cog"   column="cog"   />
+		<result     property="event" column="event"   />
+		<result     property="flag" column="flag"   />
+	</resultMap>
+
+</mapper>
